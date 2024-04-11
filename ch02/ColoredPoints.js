@@ -20,7 +20,15 @@ let canvas;
 let gl;
 let a_Position;
 let u_FragColor;
+let g_selectedColor=[1.0,1.0,1.0,1.0];
 
+function addActionsForUI() { // used this resource "https://www.w3schools.com/howto/howto_js_rangeslider.asp"
+  document.getElementById('redS').addEventListener('mouseup',function(){g_selectedColor[0]=this.value/100;}); //g_selectedColor[0]=this.value/100;
+  document.getElementById('blueS').addEventListener('mouseup',function(){g_selectedColor[1]=this.value/100;});
+  //document.getElementById('blueS').addEventListener('mouseup',function(){console.log(this.value/100)});
+  document.getElementById('greenS').addEventListener('mouseup',function(){g_selectedColor[2]=this.value/100;});
+
+}
 
 function setupWebGL() {
   // Retrieve <canvas> element
@@ -55,7 +63,7 @@ function connectVariablesToGLSL() {
     return;
   }
 }
-function renderAllShapes(){
+function renderAllShapes() {
   // Clear <canvas>
   gl.clear(gl.COLOR_BUFFER_BIT);
 
@@ -76,6 +84,7 @@ function renderAllShapes(){
 function main() {
   setupWebGL();
   connectVariablesToGLSL();
+  addActionsForUI();
   // Register function (event handler) to be called on a mouse press
   canvas.onmousedown = click;
 
@@ -96,9 +105,12 @@ function click(ev) {
 
   x = ((x - rect.left) - canvas.width / 2) / (canvas.width / 2);
   y = (canvas.height / 2 - (y - rect.top)) / (canvas.height / 2);
- 
+
   // Store the coordinates to g_points array
   g_points.push([x, y]);
+  g_colors.push(g_selectedColor.slice());
+
+  /*
   // Store the coordinates to g_points array
   if (x >= 0.0 && y >= 0.0) {      // First quadrant
     g_colors.push([1.0, 0.0, 0.0, 1.0]);  // Red
@@ -107,5 +119,6 @@ function click(ev) {
   } else {                         // Others
     g_colors.push([1.0, 1.0, 1.0, 1.0]);  // White
   }
+  */
   renderAllShapes();
 }
