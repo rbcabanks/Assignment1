@@ -1,16 +1,19 @@
+
+
 // HelloPoint1.js (c) 2012 matsuda
 // Vertex shader program
-var VSHADER_SOURCE = 
+var VSHADER_SOURCE =  // position to draw
   'void main() {\n' +
   '  gl_Position = vec4(0.0, 0.0, 0.0, 1.0);\n' + // Set the vertex coordinates of the point
   '  gl_PointSize = 10.0;\n' +                    // Set the point size
   '}\n';
 
 // Fragment shader program
-var FSHADER_SOURCE =
+var FSHADER_SOURCE = // color to draw
   'void main() {\n' +
-  '  gl_FragColor = vec4(1.0, 0.0, 0.0, 1.0);\n' + // Set the point color
+  '  gl_FragColor = vec4(1.0, 0.0, .0, 1.0);\n' + // Set the point color (red,green,blue,alpha)
   '}\n';
+
 
 function main() {
   // Retrieve <canvas> element
