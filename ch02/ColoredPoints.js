@@ -78,7 +78,7 @@ function connectVariablesToGLSL() {
 
 }
 function renderAllShapes() {
-  var startTime = performance.now();
+  //var startTime = performance.now();
   // Clear <canvas>
   gl.clear(gl.COLOR_BUFFER_BIT);
   //var len = g_points.length;
@@ -87,18 +87,18 @@ function renderAllShapes() {
   for (var i = 0; i < len; i++) {
     g_shapesList[i].render();
   }
-  var duration = performance.now() - startTime;
-  sendTextToHTML("numdot: " + len + " ms: " + Math.floor(duration) + " fps: " + Math.floor(10000 / duration),'numdot')
+  //var duration = performance.now() - startTime;
+  //sendTextToHTML("numdot: " + len + " ms: " + Math.floor(duration) + " fps: " + Math.floor(10000 / duration),'numdot')
 
 }
-function sendTextToHTML(text, htmlID) {
+/*function sendTextToHTML(text, htmlID) {
   var htmlElm = document.getElementById(htmlID);
   if (!htmlElm) {
     console.log("Failed to get " + htmlID+" from HTML");
     return;
   }
   htmlElm.innerHTML=text;
-}
+}*/
 function main() {
   setupWebGL();
   connectVariablesToGLSL();
