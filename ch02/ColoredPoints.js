@@ -27,7 +27,7 @@ let g_selectedSize = 0;
 
 
 function addActionsForUI() { // used this resource "https://www.w3schools.com/howto/howto_js_rangeslider.asp"
-  //document.getElementById('clear').onclick(function(){ctx.clearRect(0, 0, canvas.width, canvas.height)};);
+  document.getElementById('clear').onclick=function(){g_shapesList=[]; renderAllShapes();};
   document.getElementById('redS').addEventListener('mouseup', function () { g_selectedColor[0] = this.value / 100; }); //g_selectedColor[0]=this.value/100;
   document.getElementById('blueS').addEventListener('mouseup', function () { g_selectedColor[1] = this.value / 100; });
   document.getElementById('greenS').addEventListener('mouseup', function () { g_selectedColor[2] = this.value / 100; });
