@@ -27,8 +27,8 @@ let g_selectedSize = 0;
 
 
 function addActionsForUI() { // used this resource "https://www.w3schools.com/howto/howto_js_rangeslider.asp"
-  document.getElementById('clear').onclick=function(){g_shapesList=[]; renderAllShapes();};
-  document.getElementById('delete').onclick=function(){g_shapesList.splice(-1); renderAllShapes();}; // wanted to add this function because thought it might be helpful for drawing 
+  document.getElementById('clear').onclick = function () { g_shapesList = []; renderAllShapes(); };
+  document.getElementById('delete').onclick = function () { g_shapesList.splice(-1); renderAllShapes(); }; // wanted to add this function because thought it might be helpful for drawing 
   document.getElementById('redS').addEventListener('mouseup', function () { g_selectedColor[0] = this.value / 100; }); //g_selectedColor[0]=this.value/100;
   document.getElementById('blueS').addEventListener('mouseup', function () { g_selectedColor[1] = this.value / 100; });
   document.getElementById('greenS').addEventListener('mouseup', function () { g_selectedColor[2] = this.value / 100; });
@@ -41,7 +41,8 @@ function setupWebGL() {
   canvas = document.getElementById('webgl');
 
   // Get the rendering context for WebGL
-  gl = getWebGLContext(canvas);
+  //gl = getWebGLContext(canvas);
+  gl=canvas.getContext("webgl",{preserveDrawingBuffer:true});
   if (!gl) {
     console.log('Failed to get the rendering context for WebGL');
     return;
@@ -77,6 +78,7 @@ function connectVariablesToGLSL() {
 
 }
 function renderAllShapes() {
+  var startTime = performance.now();
   // Clear <canvas>
   gl.clear(gl.COLOR_BUFFER_BIT);
   //var len = g_points.length;
@@ -85,15 +87,25 @@ function renderAllShapes() {
   for (var i = 0; i < len; i++) {
     g_shapesList[i].render();
   }
-}
+  var duration = performance.now() - startTime;
+  sendTextToHTML("numdot: " + len + " ms: " + Math.floor(duration) + " fps: " + Math.floor(10000 / duration),'numdot')
 
+}
+function sendTextToHTML(text, htmlID) {
+  var htmlElm = document.getElementById(htmlID);
+  if (!htmlElm) {
+    console.log("Failed to get " + htmlID+" from HTML");
+    return;
+  }
+  htmlElm.innerHTML=text;
+}
 function main() {
   setupWebGL();
   connectVariablesToGLSL();
   addActionsForUI();
   // Register function (event handler) to be called on a mouse press
   canvas.onmousedown = click;
-  canvas.onmousemove=function(ev){if(ev.buttons==1){click(ev)}};
+  canvas.onmousemove = function (ev) { if (ev.buttons == 1) { click(ev) } };
 
   // Specify the color for clearing <canvas>
   gl.clearColor(0.0, 0.0, 0.0, 1.0);
