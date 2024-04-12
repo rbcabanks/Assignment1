@@ -4,7 +4,7 @@ var VSHADER_SOURCE =
   'attribute vec4 a_Position;\n' +
   'void main() {\n' +
   '  gl_Position = a_Position;\n' +
-  '  gl_PointSize = 10.0;\n' +
+  '  gl_PointSize = 15.0;\n' +
   '}\n';
 
 // Fragment shader program
@@ -25,7 +25,6 @@ let g_selectedColor=[1.0,1.0,1.0,1.0];
 function addActionsForUI() { // used this resource "https://www.w3schools.com/howto/howto_js_rangeslider.asp"
   document.getElementById('redS').addEventListener('mouseup',function(){g_selectedColor[0]=this.value/100;}); //g_selectedColor[0]=this.value/100;
   document.getElementById('blueS').addEventListener('mouseup',function(){g_selectedColor[1]=this.value/100;});
-  //document.getElementById('blueS').addEventListener('mouseup',function(){console.log(this.value/100)});
   document.getElementById('greenS').addEventListener('mouseup',function(){g_selectedColor[2]=this.value/100;});
 
 }
@@ -66,7 +65,6 @@ function connectVariablesToGLSL() {
 function renderAllShapes() {
   // Clear <canvas>
   gl.clear(gl.COLOR_BUFFER_BIT);
-
   var len = g_points.length;
   for (var i = 0; i < len; i++) {
     var xy = g_points[i];
@@ -109,6 +107,7 @@ function click(ev) {
   // Store the coordinates to g_points array
   g_points.push([x, y]);
   g_colors.push(g_selectedColor.slice());
+  //g_colors.push([g_selectedColor[0],g_selectedColor[1],g_selectedColor[2],g_selectedColor[3]]);
 
   /*
   // Store the coordinates to g_points array
