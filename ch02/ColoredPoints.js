@@ -28,6 +28,7 @@ let g_selectedSize = 0;
 
 function addActionsForUI() { // used this resource "https://www.w3schools.com/howto/howto_js_rangeslider.asp"
   document.getElementById('clear').onclick=function(){g_shapesList=[]; renderAllShapes();};
+  document.getElementById('delete').onclick=function(){g_shapesList.splice(-1); renderAllShapes();}; // wanted to add this function because thought it might be helpful for drawing 
   document.getElementById('redS').addEventListener('mouseup', function () { g_selectedColor[0] = this.value / 100; }); //g_selectedColor[0]=this.value/100;
   document.getElementById('blueS').addEventListener('mouseup', function () { g_selectedColor[1] = this.value / 100; });
   document.getElementById('greenS').addEventListener('mouseup', function () { g_selectedColor[2] = this.value / 100; });
@@ -93,6 +94,7 @@ function main() {
   // Register function (event handler) to be called on a mouse press
   canvas.onmousedown = click;
   canvas.onmousemove=function(ev){if(ev.buttons==1){click(ev)}};
+
   // Specify the color for clearing <canvas>
   gl.clearColor(0.0, 0.0, 0.0, 1.0);
 
