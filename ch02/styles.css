@@ -1,9 +1,10 @@
 body {
-    background-color: rgb(221, 232, 255);
+    background-color: rgb(255, 255, 255);
     outline-style: solid;
     margin: 3%;
     padding: 30px;
     border-radius: 10%;
+    border-style: inset;
 }
 canvas{
     border-radius: 10%;
