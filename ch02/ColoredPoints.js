@@ -30,10 +30,11 @@ let g_selectedColor = [1.0, 1.0, 1.0, 1.0];
 let g_selectedSize = 10;
 let g_selectedType = POINT;
 let g_segment=10;
-let g_width=0;
-let g_height=0;
+let g_width=0.0;
+let g_height=0.0;
 let g_fliph=false;
 let g_flipv=false;
+let g_eql=false
 
 function addActionsForUI() { // used this resource "https://www.w3schools.com/howto/howto_js_rangeslider.asp"
   document.getElementById('clear').onclick = function () { g_shapesList = []; renderAllShapes();};
@@ -48,8 +49,9 @@ function addActionsForUI() { // used this resource "https://www.w3schools.com/ho
   document.getElementById('triangle').onclick = function () { g_selectedType = TRIANGLE};
   document.getElementById('circle').onclick = function () { g_selectedType = CIRCLE};
   document.getElementById('segment').addEventListener('mouseup', function () { g_segment= this.value;}); //g_selectedColor[0]=this.value/100;
-  //document.getElementById('width').addEventListener('mouseup', function () { g_width= this.value;}); //g_selectedColor[0]=this.value/100;
-  //document.getElementById('height').addEventListener('mouseup', function () { g_height= this.value; }); //g_selectedColor[0]=this.value/100;
+  document.getElementById('eql').onclick = function () {if(g_eql==false){g_eql=true}else{g_eql=false};};
+  document.getElementById('width').addEventListener('mouseup', function () { g_width= this.value; console.log('g_width'+g_width);}); //g_selectedColor[0]=this.value/100;
+  document.getElementById('height').addEventListener('mouseup', function () { g_height= this.value; }); //g_selectedColor[0]=this.value/100;
 }
 
 function setupWebGL() {

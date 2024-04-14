@@ -5,8 +5,11 @@ class Triangle {
       this.position = [0.0, 0.0, 0.0, 0.0];
       this.color = [1.0, 1.0, 1.0, 1.0];
       this.size = 5.0;
+      this.widthk=g_width;
+      this.heightk=g_height;
       this.fliph=g_fliph;
       this.flipv=g_flipv;
+      this.eql=g_eql;
     }
     // rendering function... originally was in colorpoints render function
     render(){
@@ -22,27 +25,35 @@ class Triangle {
 
         gl.uniform1f(u_Size, size);
 
+        
+        var w=(parseFloat(this.size/200.0)+parseFloat(this.widthk/200));
+        var h=(parseFloat(this.size/200.0)+parseFloat(this.heightk/200));
+
         var d = this.size/200.0;
-        var w=d-d/3;
-        var h=d+g_height;
+        var k=d-d/3+(this.widthk/200);
 
         // Draw
         //gl.drawArrays(gl.POINTS, 0, 1);
-        
-        if(this.fliph==true){
-          if(this.flipv==true){
-            drawTriangle([xy[0],xy[1],xy[0]+w,xy[1],xy[0],xy[1]+h])
-          }
-          else{
-            drawTriangle([xy[0],xy[1],xy[0]-w,xy[1],xy[0],xy[1]+h]);
-          }
+        if(this.eql==true){
+          drawTriangle([xy[0],xy[1],xy[0]+k,xy[1],xy[0],xy[1]+h])
+          drawTriangle([xy[0],xy[1],xy[0]-k,xy[1],xy[0],xy[1]+h])
         }
         else{
-          if(this.flipv==true){
-            drawTriangle([xy[0],xy[1],xy[0]+w,xy[1],xy[0],xy[1]-h])
+          if(this.fliph==true){
+            if(this.flipv==true){
+              drawTriangle([xy[0],xy[1],xy[0]+w,xy[1],xy[0],xy[1]+h])
+            }
+            else{
+              drawTriangle([xy[0],xy[1],xy[0]-w,xy[1],xy[0],xy[1]+h]);
+            }
           }
           else{
-            drawTriangle([xy[0],xy[1],xy[0]-w,xy[1],xy[0],xy[1]-h]);
+            if(this.flipv==true){
+              drawTriangle([xy[0],xy[1],xy[0]+w,xy[1],xy[0],xy[1]-h])
+            }
+            else{
+              drawTriangle([xy[0],xy[1],xy[0]-w,xy[1],xy[0],xy[1]-h]);
+            }
           }
         }
         
