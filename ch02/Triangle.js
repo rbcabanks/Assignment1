@@ -14,16 +14,29 @@ class Triangle {
 
         // Pass the position of a point to a_Position variable
         //gl.vertexAttrib3f(a_Position, xy[0], xy[1], 0.0);
+        
         // Pass the color of a point to u_FragColor variable
         gl.uniform4f(u_FragColor, rgba[0], rgba[1], rgba[2], rgba[3]);
 
         gl.uniform1f(u_Size, size);
 
         var d = this.size/200.0;
+        var w=d-d/3;
+        var h=d+g_height;
+
         // Draw
         //gl.drawArrays(gl.POINTS, 0, 1);
-        drawTriangle([xy[0],xy[1],xy[0]+d,xy[1],xy[0],xy[1]+d]);
-    }
+        /*if(g_fliph==true){
+          drawTriangle([xy[0],xy[1],xy[0]+w,xy[1],xy[0],xy[1]+h])
+        }
+        else{
+          drawTriangle([xy[0],xy[1],xy[0]-w,xy[1],xy[0],xy[1]+h]);
+        }
+        //;*/
+        drawTriangle([xy[0],xy[1],xy[0]+w,xy[1],xy[0],xy[1]+h])
+        drawTriangle([xy[0],xy[1],xy[0]-w,xy[1],xy[0],xy[1]+h])
+
+      }
 }
 function drawTriangle(vertices) {
     var n = 3 // number of vertices

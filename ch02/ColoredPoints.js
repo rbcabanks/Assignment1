@@ -27,22 +27,29 @@ let a_Position;
 let u_FragColor;
 let u_Size;
 let g_selectedColor = [1.0, 1.0, 1.0, 1.0];
-let g_selectedSize =5;
+let g_selectedSize = 10;
 let g_selectedType = POINT;
 let g_segment=10;
-
+let g_width=0;
+let g_height=0;
+let g_fliph=false;
+let g_flipv=false;
 function addActionsForUI() { // used this resource "https://www.w3schools.com/howto/howto_js_rangeslider.asp"
-  document.getElementById('clear').onclick = function () { g_shapesList = []; renderAllShapes(); };
-  document.getElementById('delete').onclick = function () { g_shapesList.splice(-1); renderAllShapes(); }; // wanted to add this function because thought it might be helpful for drawing 
-  document.getElementById('redS').addEventListener('mouseup', function () { g_selectedColor[0] = this.value / 100; }); //g_selectedColor[0]=this.value/100;
-  document.getElementById('blueS').addEventListener('mouseup', function () { g_selectedColor[1] = this.value / 100; });
-  document.getElementById('greenS').addEventListener('mouseup', function () { g_selectedColor[2] = this.value / 100; });
-  document.getElementById('size').addEventListener('mouseup', function () { g_selectedSize = this.value; });
-  document.getElementById('square').onclick = function () { g_selectedType = POINT };
-  document.getElementById('triangle').onclick = function () { g_selectedType = TRIANGLE };
-  document.getElementById('circle').onclick = function () { g_selectedType = CIRCLE };
-  document.getElementById('segment').addEventListener('mouseup', function () { g_segment= this.value; }); //g_selectedColor[0]=this.value/100;
-
+  document.getElementById('clear').onclick = function () { g_shapesList = []; renderAllShapes();};
+  document.getElementById('delete').onclick = function () { g_shapesList.splice(-1); renderAllShapes();}; // wanted to add this function because thought it might be helpful for drawing 
+  //document.getElementById('fliph').onclick = function () {if(g_fliph==false){g_fliph=true}else{g_fliph=false};}; // wanted to add this function because thought it might be helpful for drawing 
+  //document.getElementById('flipv').onclick = function () {if(g_flipv==false){g_flipv=true}else{g_flipv=false};}; // wanted to add this function because thought it might be helpful for drawing 
+  document.getElementById('redS').addEventListener('mouseup', function () { g_selectedColor[0] = this.value / 100;}); //g_selectedColor[0]=this.value/100;
+  document.getElementById('blueS').addEventListener('mouseup', function () { g_selectedColor[1] = this.value / 100;});
+  document.getElementById('greenS').addEventListener('mouseup', function () { g_selectedColor[2] = this.value / 100;});
+  document.getElementById('size').addEventListener('mouseup', function () { g_selectedSize = this.value;});
+  document.getElementById('square').onclick = function () { g_selectedType = POINT};
+  document.getElementById('triangle').onclick = function () { g_selectedType = TRIANGLE};
+  document.getElementById('circle').onclick = function () { g_selectedType = CIRCLE};
+  document.getElementById('segment').addEventListener('mouseup', function () { g_segment= this.value;}); //g_selectedColor[0]=this.value/100;
+  //document.getElementById('width').addEventListener('mouseup', function () { g_width= this.value;}); //g_selectedColor[0]=this.value/100;
+  //document.getElementById('height').addEventListener('mouseup', function () { g_height= this.value; }); //g_selectedColor[0]=this.value/100;
+  
 }
 
 function setupWebGL() {
