@@ -27,9 +27,9 @@ let a_Position;
 let u_FragColor;
 let u_Size;
 let g_selectedColor = [1.0, 1.0, 1.0, 1.0];
-let g_selectedSize = 0;
+let g_selectedSize =5;
 let g_selectedType = POINT;
-
+let g_segment=10;
 
 function addActionsForUI() { // used this resource "https://www.w3schools.com/howto/howto_js_rangeslider.asp"
   document.getElementById('clear').onclick = function () { g_shapesList = []; renderAllShapes(); };
@@ -41,6 +41,7 @@ function addActionsForUI() { // used this resource "https://www.w3schools.com/ho
   document.getElementById('square').onclick = function () { g_selectedType = POINT };
   document.getElementById('triangle').onclick = function () { g_selectedType = TRIANGLE };
   document.getElementById('circle').onclick = function () { g_selectedType = CIRCLE };
+  document.getElementById('segment').addEventListener('mouseup', function () { g_segment= this.value; }); //g_selectedColor[0]=this.value/100;
 
 }
 
