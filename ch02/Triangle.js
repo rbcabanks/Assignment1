@@ -35,8 +35,14 @@ class Triangle {
         // Draw
         //gl.drawArrays(gl.POINTS, 0, 1);
         if(this.eql==true){
-          drawTriangle([xy[0],xy[1],xy[0]+k,xy[1],xy[0],xy[1]+h])
-          drawTriangle([xy[0],xy[1],xy[0]-k,xy[1],xy[0],xy[1]+h])
+          if(this.fliph==true){
+            drawTriangle([xy[0],xy[1],xy[0]+k,xy[1],xy[0],xy[1]+h])
+            drawTriangle([xy[0],xy[1],xy[0]-k,xy[1],xy[0],xy[1]+h])
+          }
+          else{
+            drawTriangle([xy[0],xy[1],xy[0]+k,xy[1],xy[0],xy[1]-h])
+            drawTriangle([xy[0],xy[1],xy[0]-k,xy[1],xy[0],xy[1]-h])
+          }
         }
         else{
           if(this.fliph==true){

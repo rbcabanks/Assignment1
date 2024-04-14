@@ -35,10 +35,14 @@ let g_height=0.0;
 let g_fliph=false;
 let g_flipv=false;
 let g_eql=false
+var g_shapesList = [];
+let bonsaiSaveArray=[]
 
 function addActionsForUI() { // used this resource "https://www.w3schools.com/howto/howto_js_rangeslider.asp"
   document.getElementById('clear').onclick = function () { g_shapesList = []; renderAllShapes();};
   document.getElementById('delete').onclick = function () { g_shapesList.splice(-1); renderAllShapes();}; // wanted to add this function because thought it might be helpful for drawing 
+  document.getElementById('bonsai').onclick = function () {saveBonsai(); console.log(g_shapesList);};
+  document.getElementById('bonsaip').onclick = function () {printBonsai(); console.log(g_shapesList);};
   document.getElementById('fliph').onclick = function () {if(g_fliph==false){g_fliph=true}else{g_fliph=false};}; // wanted to add this function because thought it might be helpful for drawing 
   document.getElementById('flipv').onclick = function () {if(g_flipv==false){g_flipv=true}else{g_flipv=false};}; // wanted to add this function because thought it might be helpful for drawing 
   document.getElementById('redS').addEventListener('mouseup', function () { g_selectedColor[0] = this.value / 100;}); //g_selectedColor[0]=this.value/100;
@@ -95,6 +99,16 @@ function connectVariablesToGLSL() {
   }
 
 }
+function saveBonsai(){
+  bonsaiSaveArray=g_shapesList;
+}
+function printBonsai(){
+  gl.clear(gl.COLOR_BUFFER_BIT);
+  var len = bonsaiSaveArray.length;
+  for (var i = 0; i < len; i++) {
+    bonsaiSaveArray[i].render();
+  }
+}
 function renderAllShapes() {
   //var startTime = performance.now();
   // Clear <canvas>
@@ -132,8 +146,6 @@ function main() {
   // Clear <canvas>
   gl.clear(gl.COLOR_BUFFER_BIT);
 }
-
-var g_shapesList = [];
 
 /*
 var g_points = [];  // The array for the position of a mouse press
