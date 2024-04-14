@@ -5,6 +5,8 @@ class Triangle {
       this.position = [0.0, 0.0, 0.0, 0.0];
       this.color = [1.0, 1.0, 1.0, 1.0];
       this.size = 5.0;
+      this.fliph=g_fliph;
+      this.flipv=g_flipv;
     }
     // rendering function... originally was in colorpoints render function
     render(){
@@ -26,15 +28,16 @@ class Triangle {
 
         // Draw
         //gl.drawArrays(gl.POINTS, 0, 1);
-        /*if(g_fliph==true){
+        
+        if(this.fliph==true){
           drawTriangle([xy[0],xy[1],xy[0]+w,xy[1],xy[0],xy[1]+h])
         }
         else{
           drawTriangle([xy[0],xy[1],xy[0]-w,xy[1],xy[0],xy[1]+h]);
         }
-        //;*/
-        drawTriangle([xy[0],xy[1],xy[0]+w,xy[1],xy[0],xy[1]+h])
-        drawTriangle([xy[0],xy[1],xy[0]-w,xy[1],xy[0],xy[1]+h])
+      
+        //drawTriangle([xy[0],xy[1],xy[0]+w,xy[1],xy[0],xy[1]+h])
+        //drawTriangle([xy[0],xy[1],xy[0]-w,xy[1],xy[0],xy[1]+h])
 
       }
 }

@@ -34,11 +34,12 @@ let g_width=0;
 let g_height=0;
 let g_fliph=false;
 let g_flipv=false;
+
 function addActionsForUI() { // used this resource "https://www.w3schools.com/howto/howto_js_rangeslider.asp"
   document.getElementById('clear').onclick = function () { g_shapesList = []; renderAllShapes();};
   document.getElementById('delete').onclick = function () { g_shapesList.splice(-1); renderAllShapes();}; // wanted to add this function because thought it might be helpful for drawing 
-  //document.getElementById('fliph').onclick = function () {if(g_fliph==false){g_fliph=true}else{g_fliph=false};}; // wanted to add this function because thought it might be helpful for drawing 
-  //document.getElementById('flipv').onclick = function () {if(g_flipv==false){g_flipv=true}else{g_flipv=false};}; // wanted to add this function because thought it might be helpful for drawing 
+  document.getElementById('fliph').onclick = function () {if(g_fliph==false){g_fliph=true}else{g_fliph=false};}; // wanted to add this function because thought it might be helpful for drawing 
+  document.getElementById('flipv').onclick = function () {if(g_flipv==false){g_flipv=true}else{g_flipv=false};}; // wanted to add this function because thought it might be helpful for drawing 
   document.getElementById('redS').addEventListener('mouseup', function () { g_selectedColor[0] = this.value / 100;}); //g_selectedColor[0]=this.value/100;
   document.getElementById('blueS').addEventListener('mouseup', function () { g_selectedColor[1] = this.value / 100;});
   document.getElementById('greenS').addEventListener('mouseup', function () { g_selectedColor[2] = this.value / 100;});
@@ -49,7 +50,6 @@ function addActionsForUI() { // used this resource "https://www.w3schools.com/ho
   document.getElementById('segment').addEventListener('mouseup', function () { g_segment= this.value;}); //g_selectedColor[0]=this.value/100;
   //document.getElementById('width').addEventListener('mouseup', function () { g_width= this.value;}); //g_selectedColor[0]=this.value/100;
   //document.getElementById('height').addEventListener('mouseup', function () { g_height= this.value; }); //g_selectedColor[0]=this.value/100;
-  
 }
 
 function setupWebGL() {
