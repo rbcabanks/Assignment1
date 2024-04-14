@@ -19,6 +19,8 @@ var FSHADER_SOURCE =
 // global variables
 const POINT = 0;
 const TRIANGLE = 1;
+const CIRCLE = 2;
+
 let canvas;
 let gl;
 let a_Position;
@@ -38,6 +40,8 @@ function addActionsForUI() { // used this resource "https://www.w3schools.com/ho
   document.getElementById('size').addEventListener('mouseup', function () { g_selectedSize = this.value; });
   document.getElementById('square').onclick = function () { g_selectedType = POINT };
   document.getElementById('triangle').onclick = function () { g_selectedType = TRIANGLE };
+  document.getElementById('circle').onclick = function () { g_selectedType = CIRCLE };
+
 }
 
 function setupWebGL() {
@@ -136,11 +140,15 @@ function click(ev) {
 
   let point = new Point();
   if (g_selectedType == POINT) {
-    point= new Point();
+    point = new Point();
   }
-  else{
-    point= new Triangle();
+  else if (g_selectedType==CIRCLE){
+    point = new Circle();
   }
+  else {
+    point = new Triangle();
+  }
+
   point.position = [x, y];
   point.color = g_selectedColor.slice();
   point.size = g_selectedSize;
