@@ -17,6 +17,8 @@ var FSHADER_SOURCE =
   '}\n';
 
 // global variables
+const POINT = 0;
+const TRIANGLE = 1;
 let canvas;
 let gl;
 let a_Position;
@@ -24,6 +26,7 @@ let u_FragColor;
 let u_Size;
 let g_selectedColor = [1.0, 1.0, 1.0, 1.0];
 let g_selectedSize = 0;
+let g_selectedType = POINT;
 
 
 function addActionsForUI() { // used this resource "https://www.w3schools.com/howto/howto_js_rangeslider.asp"
@@ -33,7 +36,8 @@ function addActionsForUI() { // used this resource "https://www.w3schools.com/ho
   document.getElementById('blueS').addEventListener('mouseup', function () { g_selectedColor[1] = this.value / 100; });
   document.getElementById('greenS').addEventListener('mouseup', function () { g_selectedColor[2] = this.value / 100; });
   document.getElementById('size').addEventListener('mouseup', function () { g_selectedSize = this.value; });
-
+  document.getElementById('square').onclick = function () { g_selectedType = POINT };
+  document.getElementById('triangle').onclick = function () { g_selectedType = TRIANGLE };
 }
 
 function setupWebGL() {
@@ -131,6 +135,12 @@ function click(ev) {
   y = (canvas.height / 2 - (y - rect.top)) / (canvas.height / 2);
 
   let point = new Point();
+  if (g_selectedType == POINT) {
+    point= new Point();
+  }
+  else{
+    point= new Triangle();
+  }
   point.position = [x, y];
   point.color = g_selectedColor.slice();
   point.size = g_selectedSize;

@@ -18,9 +18,11 @@ class Triangle {
         gl.uniform4f(u_FragColor, rgba[0], rgba[1], rgba[2], rgba[3]);
 
         gl.uniform1f(u_Size, size);
+
+        var d = this.size/200.0;
         // Draw
         //gl.drawArrays(gl.POINTS, 0, 1);
-        drawTriangle([xy[0],xy[1],xy[0]+.1,xy[1],xy[0],xy[1]+.1]);
+        drawTriangle([xy[0],xy[1],xy[0]+d,xy[1],xy[0],xy[1]+d]);
     }
 }
 function drawTriangle(vertices) {
@@ -35,7 +37,7 @@ function drawTriangle(vertices) {
     // bind the buffer object to the target
     gl.bindBuffer(gl.ARRAY_BUFFER,vertexBuffer);
     // write date into buffer object
-    gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(vertices),gl.STATIC_DRAW);
+    gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(vertices),gl.DYNAMIC_DRAW);
   
     var a_Position = gl.getAttribLocation(gl.program,'a_Position');
     if(a_Position<0){
