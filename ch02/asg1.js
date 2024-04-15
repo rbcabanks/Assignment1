@@ -38,14 +38,14 @@ let g_flipv=false;
 let g_eql=false
 var g_shapesList = [];
 let bonsaiSaveArray=[]
-
+let refImage=document.getElementById('img2')
 
 function addActionsForUI() { // used this resource "https://www.w3schools.com/howto/howto_js_rangeslider.asp"
   document.getElementById('clear').onclick = function () { g_shapesList = []; renderAllShapes();};
   document.getElementById('delete').onclick = function () { g_shapesList.splice(-1); renderAllShapes();}; // wanted to add this function because thought it might be helpful for drawing 
   //document.getElementById('bonsai').onclick = function () {saveBonsai(); console.log(g_shapesList);};
-  document.getElementById('bonsaip').onclick = function () {canvas.style.display = "none"; renderAllShapes(); display2.style.display="block"; printBonsai();};
-  document.getElementById('return').onclick = function () {canvas.style.display = "block"; renderAllShapes(); display2.style.display="none";};
+  document.getElementById('bonsaip').onclick = function () {canvas.style.display = "none"; renderAllShapes(); display2.style.display="block"; refImage.style.display="block";printBonsai();};
+  document.getElementById('return').onclick = function () {canvas.style.display = "block"; renderAllShapes(); display2.style.display="none"; refImage.style.display="none"};
 
   document.getElementById('fliph').onclick = function () {if(g_fliph==false){g_fliph=true}else{g_fliph=false};}; // wanted to add this function because thought it might be helpful for drawing 
   document.getElementById('flipv').onclick = function () {if(g_flipv==false){g_flipv=true}else{g_flipv=false};}; // wanted to add this function because thought it might be helpful for drawing 
