@@ -22,6 +22,7 @@ const TRIANGLE = 1;
 const CIRCLE = 2;
 
 let canvas;
+let display2;
 let gl;
 let a_Position;
 let u_FragColor;
@@ -38,16 +39,19 @@ let g_eql=false
 var g_shapesList = [];
 let bonsaiSaveArray=[]
 
+
 function addActionsForUI() { // used this resource "https://www.w3schools.com/howto/howto_js_rangeslider.asp"
   document.getElementById('clear').onclick = function () { g_shapesList = []; renderAllShapes();};
   document.getElementById('delete').onclick = function () { g_shapesList.splice(-1); renderAllShapes();}; // wanted to add this function because thought it might be helpful for drawing 
-  document.getElementById('bonsai').onclick = function () {saveBonsai(); console.log(g_shapesList);};
-  document.getElementById('bonsaip').onclick = function () {printBonsai(); console.log(g_shapesList);};
+  //document.getElementById('bonsai').onclick = function () {saveBonsai(); console.log(g_shapesList);};
+  document.getElementById('bonsaip').onclick = function () {canvas.style.display = "none"; renderAllShapes(); display2.style.display="block"; printBonsai();};
+  document.getElementById('return').onclick = function () {canvas.style.display = "block"; renderAllShapes(); display2.style.display="none";};
+
   document.getElementById('fliph').onclick = function () {if(g_fliph==false){g_fliph=true}else{g_fliph=false};}; // wanted to add this function because thought it might be helpful for drawing 
   document.getElementById('flipv').onclick = function () {if(g_flipv==false){g_flipv=true}else{g_flipv=false};}; // wanted to add this function because thought it might be helpful for drawing 
   document.getElementById('redS').addEventListener('mouseup', function () { g_selectedColor[0] = this.value / 100;}); //g_selectedColor[0]=this.value/100;
-  document.getElementById('blueS').addEventListener('mouseup', function () { g_selectedColor[1] = this.value / 100;});
-  document.getElementById('greenS').addEventListener('mouseup', function () { g_selectedColor[2] = this.value / 100;});
+  document.getElementById('blueS').addEventListener('mouseup', function () { g_selectedColor[2] = this.value / 100;});
+  document.getElementById('greenS').addEventListener('mouseup', function () { g_selectedColor[1] = this.value / 100;});
   document.getElementById('size').addEventListener('mouseup', function () { g_selectedSize = this.value;});
   document.getElementById('square').onclick = function () { g_selectedType = POINT};
   document.getElementById('triangle').onclick = function () { g_selectedType = TRIANGLE};
@@ -61,6 +65,8 @@ function addActionsForUI() { // used this resource "https://www.w3schools.com/ho
 function setupWebGL() {
   // Retrieve <canvas> element
   canvas = document.getElementById('webgl');
+  display2 = document.getElementById("secondcanv");
+  display2.style.display="none";
 
   // Get the rendering context for WebGL
   //gl = getWebGLContext(canvas);
@@ -99,15 +105,14 @@ function connectVariablesToGLSL() {
   }
 
 }
-function saveBonsai(){
-  bonsaiSaveArray=g_shapesList;
-}
+
 function printBonsai(){
   gl.clear(gl.COLOR_BUFFER_BIT);
-  var len = bonsaiSaveArray.length;
-  for (var i = 0; i < len; i++) {
-    bonsaiSaveArray[i].render();
-  }
+  // created a second 2d canvas to show my own image so I didn't have to write all the complexities needed to print a 2d image in the background of the webgl canvas.  
+  const canvas2 = document.getElementById("secondcanv");
+  const ctx = canvas2.getContext("2d");
+  const imag = document.getElementById("img");
+  ctx.drawImage(imag,-80,-30,1460,800);
 }
 function renderAllShapes() {
   //var startTime = performance.now();
